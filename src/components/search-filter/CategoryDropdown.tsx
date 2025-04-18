@@ -1,13 +1,14 @@
 "use client";
-import { Category } from "@/payload-types";
 import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useDropdownPosition } from "./use-dropdown-position";
 import { SubCategoryMenu } from "./SubCategoryMenu";
+import { CustomCategory } from "@/types/types";
+import Link from "next/link";
 
 interface CategoryDropdownProps {
-  category: Category;
+  category: CustomCategory;
   isActive?: boolean;
   isNavigationForward?: boolean;
 }
@@ -40,10 +41,13 @@ export const CategoryDropdown = ({
           variant={"elevated"}
           className={cn(
             "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black ",
-            isActive && !isNavigationForward && "bg-white border-primary"
+            isActive && !isNavigationForward && "bg-white border-primary",
+            isOpen && "bg-white border-primary"
           )}
         >
-          {category.name}
+          <Link href={`/${category.slug === "all" ? "" : category.slug}`}>
+            {category.name}
+          </Link>
         </Button>
         {category.subcategories && category.subcategories.length > 0 && (
           <div
