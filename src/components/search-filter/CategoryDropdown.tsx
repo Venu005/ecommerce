@@ -4,11 +4,12 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useDropdownPosition } from "./use-dropdown-position";
 import { SubCategoryMenu } from "./SubCategoryMenu";
-import { CustomCategory } from "@/types/types";
+
 import Link from "next/link";
+import { CategoriesGetManyOutputSingle } from "@/modules/categories/types";
 
 interface CategoryDropdownProps {
-  category: CustomCategory;
+  category: CategoriesGetManyOutputSingle;
   isActive?: boolean;
   isNavigationForward?: boolean;
 }
@@ -24,7 +25,7 @@ export const CategoryDropdown = ({
   const dropDownPosition = getDropdownPosition();
   const onMouseEnter = () => {
     if (category.subcategories) {
-      console.log("category.subcategories", category.subcategories);
+      // console.log("category.subcategories", category.subcategories);
       setIsOpen(true);
     }
   };

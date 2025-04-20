@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { CategoryDropdown } from "./CategoryDropdown";
-import { CustomCategory } from "@/types/types";
+
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { ListFilterIcon } from "lucide-react";
 import { CategoriesSideBar } from "./CategoriesSideBar";
+import { CategoriesGetManyOutput } from "@/modules/categories/types";
 
 interface CatProps {
-  data: CustomCategory[];
+  data: CategoriesGetManyOutput;
 }
 export const CatComp = ({ data }: CatProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,8 +52,7 @@ export const CatComp = ({ data }: CatProps) => {
 
   return (
     <div className="relative w-full">
-
-       <CategoriesSideBar open = {isSidebarOpen} onOpenChange= {setIsSidebarOpen} data={data} />
+      <CategoriesSideBar open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
       {/*
         hidden div to measure the width of the items
         and calculate how many can fit in the container
@@ -94,7 +94,7 @@ export const CatComp = ({ data }: CatProps) => {
               "h-11 px-4 bg-transparent border-transparent rounded-full hover:bg-white hover:border-primary text-black",
               isActiveCatHidden && !isAnyHovered && "bg-white border-primary"
             )}
-            onClick={()=> setIsSidebarOpen(true)}
+            onClick={() => setIsSidebarOpen(true)}
           >
             View All
             <ListFilterIcon className="ml-2" />
